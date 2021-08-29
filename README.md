@@ -1,7 +1,7 @@
 # Task Tracker
 
-Website: [Task Tracker](https://tracktasker.netlify.app/){:target="_blank"}
-Url: https://tracktasker.netlify.app{:target="_blank"}
+- Website: [Task Tracker](https://tracktasker.netlify.app/)
+- Url: https://tracktasker.netlify.app
 
 ## Getting Started with Create React App
 
