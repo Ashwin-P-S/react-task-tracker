@@ -28,6 +28,13 @@ function App() {
     return data;
   } 
 
+  const fetch_Task = async(id) => {
+    const res = await fetch(`http://localhost:8000/task/${id}`);
+    const data = await res.json();
+
+    return data;
+  }
+
   const addTask = async (add_task) => {
     
     const res= await fetch('http://localhost:8000/task',{
@@ -55,19 +62,38 @@ function App() {
     setTask(task.filter((task) => task.id !== id));
   }
 
-  const toggleReminder = (id) => {
+  const toggleReminder = async(id) => {
 
-    setTask(task.map((task) => task.id === id ? {...task, reminder: !task.reminder}: task))
+    const taskToToggle = await fetch_Task(id);
+    const updTask = { ...taskToToggle, reminder: !taskToToggle.reminder };
+    const res = await fetch( `http://localhost:8000/task/${id}`, {
+      method: 'PUT',
+      headers: {
+      'Content-type': 'application/json'
+      },
+      body: JSON.stringify(updTask)
+    });
+
+    const data = await res.json()
+
+    setTask(task.map((task) => task.id === id ? {...task, reminder: data.reminder}: task))
   }
 
   return (
     <Router>
       <div className="container">      
         <Header onAdd={() => setShowAddTask(!showAddTask)} showAdd={showAddTask}/>
-        {showAddTask && <AddTask key={task.id} onAdd={addTask}/>}
-        { task.length > 0? <Task task={task} onDelete={deleteTask} onToggle={toggleReminder }/> : <p>No Task To Show</p> }
-        <Route />    
-        <Footer />
+        
+        <Route path='/' exact render={ (props) => (
+          <>
+          {showAddTask && <AddTask key={task.id} onAdd={addTask}/>}
+          { task.length > 0? ( <Task task={task} onDelete={deleteTask} onToggle={toggleReminder }/> )
+          : ( <p>No Task To Show</p> ) } 
+          <Footer />
+          </>
+        ) } />
+        <Route path='/about' component={About}/>    
+        
       </div>
     </Router>
   );
