@@ -45,9 +45,8 @@ body {
   outline: none;
 }
 
-.btn:active, .btn:hover {
+.btn:active {
   transform: scale(0.98);
-  font-size: 110%;
 }
 
 .btn-block {
