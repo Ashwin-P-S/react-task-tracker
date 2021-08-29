@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import {BrowserRouter as Router, Route } from 'react-router-dom';
 import Header from './components/Header';
+import Name from './components/Name'
 import Task from './components/Task';
 import AddTask from './components/AddTask';
 import Footer from './components/Footer';
@@ -58,7 +59,7 @@ function App() {
     <Router>
       <div className="container">      
         <Header onAdd={() => setShowAddTask(!showAddTask)} showAdd={showAddTask}/>
-        
+        <Name />
         <Route path='/' exact render={ (props) => (
           <>
           {showAddTask && <AddTask key={task.id} onAdd={addTask}/>}

@@ -45,8 +45,9 @@ body {
   outline: none;
 }
 
-.btn:active {
+.btn:active, .btn:hover {
   transform: scale(0.98);
+  font-size: 110%;
 }
 
 .btn-block {
@@ -117,4 +118,17 @@ footer {
 #pageLink:hover{
   color: green;
   font-size: 105%;
+}
+.myName, .myNameLink{ 
+  text-decoration: none;
+  text-align: center;
+  color: green;
+  padding-bottom: 10px;
+  font-size: 18px;
+}
+.myNameLink:hover{
+  cursor: pointer;
+  font-size: 110%;
+  column-gap: 10px;
+  -webkit-column-gap: 10px;
 }
